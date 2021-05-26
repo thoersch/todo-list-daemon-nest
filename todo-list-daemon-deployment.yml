@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-list-daemon-deployment
+  labels:
+    app: todo-list-daemon
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-list-daemon
+  template:
+    metadata:
+      labels:
+        app: todo-list-daemon
+    spec:
+      containers:
+      - name: todo-list-daemon
+        image: thoersch/todo-list-daemon
+        env:
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: username
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: password
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-configmap
+              key: db_host

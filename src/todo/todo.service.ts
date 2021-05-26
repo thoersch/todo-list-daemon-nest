@@ -8,7 +8,7 @@ import { Todo } from './todo.entity';
 export class TodoService {
     private readonly logger = new Logger(TodoService.name);
 
-    constructor(@InjectRepository(Todo) private todoRepository: Repository<Todo>) {
+    constructor(@InjectRepository(Todo) private todoRepository: Repository<Todo>) {     
     }
 
     @Cron(CronExpression.EVERY_MINUTE)
