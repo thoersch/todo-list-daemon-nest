@@ -29,6 +29,24 @@ Every minute, the daemon will report out how many stored todos exist.
 * Build container: `docker build -t your_tag .`
 * Run container: `docker run -d -t your_tag`
 
+## Kubernetes (minikube)
+
+Prerequisities for minikube:
+* `brew install hyperkit`
+* `brew install minikube`
+
+Start the minikube cluster
+* `minikube start --vm-driveer=hyperkit`
+
+Verify cluster exists and ready:
+* `kubectl get nodes`
+
+Apply stack:
+
+**NOTE** Apply stack from API before applying daemon deployment
+
+* `kubectl apply -f todo-list-daemon-deployment.yml`
+
 ## License
 
 Copyright © 2021 Tyler Hoersch
